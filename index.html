@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Vision System</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="bg-orb orb-1"></div>
+  <div class="bg-orb orb-2"></div>
+  <div class="bg-orb orb-3"></div>
+
+  <main class="app-shell">
+    <section id="page-landing" class="page active">
+      <div class="glass card landing-card fade-up">
+        <h1 class="title">AI Vision System</h1>
+        <p class="subtitle">Generate captions or search images using AI</p>
+
+        <div class="mode-grid">
+          <button class="mode-card" data-target="page-captioning">
+            <div class="icon-wrap">📸</div>
+            <h3>Image Captioning</h3>
+            <p>Generate meaningful captions from dataset, upload, webcam, or URL.</p>
+          </button>
+
+          <button class="mode-card" data-target="page-retrieval">
+            <div class="icon-wrap">🔍</div>
+            <h3>Image Retrieval</h3>
+            <p>Search relevant images instantly using natural language queries.</p>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <section id="page-captioning" class="page">
+      <div class="topbar fade-up">
+        <button class="ghost-btn back-btn" data-target="page-landing">← Back</button>
+        <h2>Image Captioning</h2>
+      </div>
+
+      <div class="layout-grid fade-up">
+        <div class="glass card left-panel">
+          <div class="tabs" role="tablist" aria-label="Input type">
+            <button class="tab active" data-mode="dataset">Dataset</button>
+            <button class="tab" data-mode="local">Local Upload</button>
+            <button class="tab" data-mode="webcam">Webcam Capture</button>
+            <button class="tab" data-mode="url">Image URL</button>
+          </div>
+
+          <div id="mode-dataset" class="mode-panel active">
+            <p class="helper">Use a random sample image from dataset.</p>
+            <button id="randomImageBtn" class="primary-btn">Generate Random Image</button>
+          </div>
+
+          <div id="mode-local" class="mode-panel">
+            <p class="helper">Drag & drop or click to upload an image.</p>
+            <label class="drop-zone" for="fileInput">
+              <input id="fileInput" type="file" accept="image/*" />
+              <span>Drop image here or <b>browse files</b></span>
+            </label>
+          </div>
+
+          <div id="mode-webcam" class="mode-panel">
+            <p class="helper">Capture from your live camera feed.</p>
+            <video id="webcamPreview" autoplay playsinline muted></video>
+            <div class="row">
+              <button id="startCameraBtn" class="ghost-btn">Start Camera</button>
+              <button id="captureBtn" class="primary-btn">Capture</button>
+            </div>
+          </div>
+
+          <div id="mode-url" class="mode-panel">
+            <p class="helper">Paste an image URL and load preview.</p>
+            <div class="url-row">
+              <input id="urlInput" type="url" placeholder="https://example.com/image.jpg" />
+              <button id="loadUrlBtn" class="primary-btn">Load</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="glass card right-panel">
+          <h3>Image Preview</h3>
+          <div class="preview-card">
+            <img id="previewImage" alt="Selected preview" />
+            <p id="emptyPreviewText">No image selected yet.</p>
+          </div>
+          <button id="generateCaptionBtn" class="primary-btn wide">Generate Caption</button>
+
+          <div class="output-box">
+            <div id="captionLoading" class="loader hidden"></div>
+            <p id="captionText" class="caption-text">Caption will appear here.</p>
+            <p id="confidenceText" class="confidence-text"></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="page-retrieval" class="page">
+      <div class="topbar fade-up">
+        <button class="ghost-btn back-btn" data-target="page-landing">← Back</button>
+        <h2>Image Retrieval</h2>
+      </div>
+
+      <div class="glass card retrieval-card fade-up">
+        <div class="search-wrap">
+          <input id="searchInput" type="text" placeholder="Search images (e.g., dog playing, sunset beach...)" />
+          <button id="searchBtn" class="primary-btn search-btn">Search</button>
+        </div>
+
+        <div id="resultsGrid" class="results-grid"></div>
+      </div>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
